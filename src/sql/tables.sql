@@ -1,0 +1,56 @@
+-- one2one using primary key starts
+DROP TABLE CITIZEN;
+DROP TABLE ADHAAR_CARD;
+
+CREATE TABLE CITIZEN (
+   UUID varchar(32) NOT NULL ,
+   NAME varchar(128) NOT NULL,
+   AGE int(2) NOT NULL, 
+   PRIMARY KEY (UUID)
+);
+CREATE TABLE ADHAAR_CARD (
+   UUID varchar(32) NOT NULL,
+   ADHAAR_NUMBER varchar(30) NOT NULL,
+   ADHAAR_ADDRESS varchar(120) NOT NULL,
+   PRIMARY KEY (UUID)
+);
+
+select * from  CITIZEN;
+select * from  ADHAAR_CARD;
+-- one2one using primary key ends
+
+-- one2one using foreign key starts
+
+DROP TABLE PERSON;
+DROP TABLE PHONE_NUMBER;
+
+
+CREATE TABLE PERSON(
+P_UUID VARCHAR(32) NOT NULL,
+NAME VARCHAR(30) NOT NULL,
+AGE INT NOT NULL, 
+PRIMARY KEY(P_UUID));
+ 
+CREATE TABLE PHONE_NUMBER(
+PN_UUID VARCHAR(32) NOT NULL,
+PROVIDER VARCHAR(30)NOT NULL,
+NUMBER VARCHAR(10) NOT NULL,
+PERSON_UUID VARCHAR(32) NOT NULL,
+PRIMARY KEY (PN_UUID),
+KEY (PERSON_UUID),
+CONSTRAINT FOREIGN KEY(PERSON_UUID) REFERENCES PERSON(P_UUID)
+);
+
+ select * from phone_number;
+
+ select * from person;
+
+-- one2one using foreign key ends
+
+
+
+
+
+
+
+

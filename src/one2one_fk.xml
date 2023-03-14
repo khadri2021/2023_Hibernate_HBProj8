@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class
+		name="com.khadri.hibernate.association.one2one.fk.PhoneNumber"
+		table="PHONE_NUMBER">
+		<id name="uuid" column="PN_UUID" type="string">
+			<generator class="uuid" />
+		</id>
+		<property name="provider" column="PROVIDER" type="string" />
+		<property name="number" column="NUMBER" type="string" />
+
+		<many-to-one name="person"
+			class="com.khadri.hibernate.association.one2one.fk.Person"
+			column="PERSON_UUID" unique="true" not-null="true" cascade="all" />
+
+	</class>
+
+	<class name="com.khadri.hibernate.association.one2one.fk.Person"
+		table="PERSON">
+		<id name="uuid" column="P_UUID" type="string">
+			<generator class="uuid" />
+		</id>
+		<property name="name" column="NAME" type="string" />
+		<property name="age" column="AGE" type="int" />
+	</class>
+</hibernate-mapping>

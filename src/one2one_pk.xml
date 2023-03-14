@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.khadri.hibernate.association.one2one.pk.Citizen"
+		table="CITIZEN">
+		<id name="uuid" column="UUID" type="string">
+			<generator class="uuid" />
+		</id>
+		<property name="name" column="NAME" type="string" />
+		<property name="age" column="AGE" type="int" />
+
+		<one-to-one name="adhaarCard"
+			class="com.khadri.hibernate.association.one2one.pk.AdhaarCard"
+			cascade="all" />
+	</class>
+	<class name="com.khadri.hibernate.association.one2one.pk.AdhaarCard"
+		table="ADHAAR_CARD">
+		<id name="uuid" column="UUID" type="string">
+			<generator class="foreign" >
+				<param name="property">citizen</param> <!-- Citizen UUID will be inserted -->
+			</generator>
+		</id>
+		<property name="adhaarNumber" column="ADHAAR_NUMBER"
+			type="string" />
+		<property name="address" column="ADHAAR_ADDRESS"
+			type="string" />
+		<one-to-one name="citizen"
+			class="com.khadri.hibernate.association.one2one.pk.Citizen"
+			constrained="true" />
+	</class>
+
+</hibernate-mapping>
