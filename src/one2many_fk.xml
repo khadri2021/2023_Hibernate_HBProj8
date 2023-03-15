@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.khadri.hibernate.association.one2many.fk">
+
+	<class name="Merchant" table="MERCHANT">
+		<id name="uuid" column="UUID" type="string">
+			<generator class="uuid" />
+		</id>
+		<property name="name" column="NAME" type="string" />
+		<property name="owner" column="OWNER" type="string" />
+
+		<set name="stores" inverse="true" cascade="all">
+			<key column="MERCHANT_UUID" not-null="true" />
+			<one-to-many class="Store" />
+		</set>
+	</class>
+
+	<class name="Store" table="STORE">
+		<id name="uuid" column="UUID" type="string">
+			<generator class="uuid" />
+		</id>
+		<property name="name" column="NAME" type="string" />
+		<property name="location" column="LOCATION" type="string" />
+		<property name="gstNumber" column="GST_NUMBER" type="int" />
+		<many-to-one name="merchant" column="MERCHANT_UUID"
+			class="Merchant" not-null="true" />
+
+	</class>
+</hibernate-mapping>

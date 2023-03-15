@@ -9,5 +9,6 @@
 		<property name="show_sql">true</property>
 		<mapping resource="one2one_pk.xml" />
 		<mapping resource="one2one_fk.xml" />
+		<mapping resource="one2many_fk.xml" />
 	</session-factory>
 </hibernate-configuration>
