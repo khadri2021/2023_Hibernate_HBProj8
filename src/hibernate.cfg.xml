@@ -10,5 +10,6 @@
 		<mapping resource="one2one_pk.xml" />
 		<mapping resource="one2one_fk.xml" />
 		<mapping resource="one2many_fk.xml" />
+		<mapping resource="one2many_join_table.xml" />
 	</session-factory>
 </hibernate-configuration>

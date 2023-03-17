@@ -4,29 +4,34 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping
-	package="com.khadri.hibernate.association.one2many.fk">
+	package="com.khadri.hibernate.association.one2many.join.table">
 
-	<class name="Merchant" table="MERCHANT">
+	<class name="Merchant2" table="MERCHANT2">
 		<id name="uuid" column="UUID" type="string">
 			<generator class="uuid" />
 		</id>
 		<property name="name" column="NAME" type="string" />
 		<property name="owner" column="OWNER" type="string" />
 
-		<set name="stores" inverse="true" cascade="all">
-			<key column="MERCHANT_UUID" not-null="true" />
-			<one-to-many class="Store" />
+		<set name="stores" table="MERCHANT2_STORE2" cascade="all">
+			<key column="MERCHANT2_UUID" not-null="true" />
+			<many-to-many class="Store2" column="STORE2_UUID"
+				unique="true" />
 		</set>
 	</class>
 
-	<class name="Store" table="STORE">
+	<class name="Store2" table="STORE2">
 		<id name="uuid" column="UUID" type="string">
 			<generator class="uuid" />
 		</id>
 		<property name="name" column="NAME" type="string" />
 		<property name="location" column="LOCATION" type="string" />
 		<property name="gstNumber" column="GST_NUMBER" type="int" />
-		<many-to-one name="merchant" column="MERCHANT_UUID"
-			class="Merchant" not-null="true" />
+		<join table="MERCHANT2_STORE2" inverse="true">
+			<key column="STORE2_UUID" />
+			<many-to-one name="merchant" column="MERCHANT2_UUID"
+				not-null="true" />
+
+		</join>
 	</class>
 </hibernate-mapping>
